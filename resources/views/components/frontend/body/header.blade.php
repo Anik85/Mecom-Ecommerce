@@ -48,6 +48,9 @@
                     <div class="wrap-logo-top left-section">
                         <a href="index.html" class="link-to-home"><img src="{{asset('ui/frontend/assets/images/logo-top-1.png')}}" alt="mercado"></a>
                     </div>
+                    @php 
+                        $categories= App\Models\Category::orderBy('category_name','ASC')->get();
+                    @endphp
 
                     <div class="wrap-search center-section">
                         <div class="wrap-search-form">
@@ -58,24 +61,12 @@
                                     <input type="hidden" name="product-cate" value="0" id="product-cate">
                                     <a href="#" class="link-control">All Category</a>
                                     <ul class="list-cate">
-                                        <li class="level-0">All Category</li>
+                                        <!-- <li class="level-0">All Category</li>
                                         <li class="level-1">-Electronics</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Headphone & Headsets</li>
-                                        <li class="level-2">Mp3 Player & Acessories</li>
-                                        <li class="level-1">-Smartphone & Table</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Mp3 Player & Headphones</li>
-                                        <li class="level-2">Table & Accessories</li>
-                                        <li class="level-1">-Electronics</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Headphone & Headsets</li>
-                                        <li class="level-2">Mp3 Player & Acessories</li>
-                                        <li class="level-1">-Smartphone & Table</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Mp3 Player & Headphones</li>
-                                        <li class="level-2">Table & Accessories</li>
-                                    </ul>
+                                        <li class="level-2">Batteries & Chargens</li> -->
+                                        @foreach($categories as $category)
+                                            <li class="level-1">{{$category->category_name}}</li>
+                                        @endforeach 
                                 </div>
                             </form>
                         </div>
