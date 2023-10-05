@@ -62,8 +62,7 @@
                             <p class="availability">Availability: <b>In Stock </b></p>
                         @else
                             <p class="availability">Availability: <b>Out of Stock </b></p>
-                        @endif
-                        
+                        @endif                       
                     </div>
                     <div class="quantity">
                         <span>Quantity:</span>
