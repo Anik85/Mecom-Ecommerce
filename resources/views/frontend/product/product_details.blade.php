@@ -89,24 +89,77 @@
                     </div>
                     <div class="tab-contents">
                         <div class="tab-content-item active" id="description">
-                            <p>Lorem ipsum dolor sit amet, an munere tibique consequat mel, congue albucius no qui, a t everti meliore erroribus sea. ro cum. Sea ne accusata voluptatibus. Ne cum falli dolor voluptua, duo ei sonet choro facilisis, labores officiis torquatos cum ei.</p>
-                            <p>Cum altera mandamus in, mea verear disputationi et. Vel regione discere ut, legere expetenda ut eos. In nam nibh invenire similique. Atqui mollis ea his, ius graecis accommodare te. No eam tota nostrum eque. Est cu nibh clita. Sed an nominavi, et stituto, duo id rebum lucilius. Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus taria . </p>
-                            <p>experian soleat maluisset per. Has eu idque similique, et blandit scriptorem tatibus mea. Vis quaeque ocurreret ea.cu bus  scripserit, modus voluptaria ex per.</p>
+                            {{$product->long_descp}}
                         </div>
-                        <div class="tab-content-item " id="add_infomation">
-                            <table class="shop_attributes">
+                        <div class="tab-content-item" id="add_infomation" style="padding: 30px 30px;">
+                            <!-- <table class="shop_attributes">
                                 <tbody>
                                     <tr>
-                                        <th>Weight</th><td class="product_weight">1 kg</td>
+                                        <th>Size</th>
+                                        @if($product->product_size==NULL)
+
+                                        @else
+                                        <td class="product_weight">
+                                            <select class="form-control unicase-form-control" id="size">
+                                                <option selected disabled>Choose Size</option>
+                                                @foreach($product_size as $size)
+                                                    <option value="{{$size}}">{{ucwords($size)}}</option>
+
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        @endif
                                     </tr>
                                     <tr>
-                                        <th>Dimensions</th><td class="product_dimensions">12 x 15 x 23 cm</td>
+                                        <th>Color</th>
+                                        @if($product->product_color==NULL)
+
+                                        @else
+                                        <td class="product_weight">
+                                            <select class="form-control unicase-form-control" id="size">
+                                                <option selected disabled>Choose Color</option>
+                                                @foreach($product_color as $color)
+                                                    <option value="{{$color}}">{{ucwords($color)}}</option>
+
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        
+                                        @endif
                                     </tr>
-                                    <tr>
-                                        <th>Color</th><td><p>Black, Blue, Grey, Violet, Yellow</p></td>
-                                    </tr>
+                                    <tr></tr>
                                 </tbody>
-                            </table>
+                            </table> -->
+
+                            <option selected disabled>Choose Size</option>
+                            @if($product->product_size==NULL)
+
+                            @else
+                            <strong class="product_weight"> </strong>
+                                <select class="form-control unicase-form-control" id="size">
+                                    
+                                    @foreach($product_size as $size)
+                                        <option value="{{$size}}">{{ucwords($size)}}</option>
+
+                                    @endforeach
+                                </select>
+                            
+                            @endif
+                            <option selected disabled>Choose Color</option>
+                            @if($product->product_color==NULL)
+
+                            @else
+                            <strong class="product_weight"></strong>
+                                <select class="form-control unicase-form-control" id="size">
+                                    
+                                    @foreach($product_color as $color)
+                                        <option value="{{$color}}">{{ucwords($color)}}</option>
+
+                                    @endforeach
+                                </select>
+                            
+                            @endif
+
                         </div>
                         <div class="tab-content-item " id="review">
                             
@@ -117,7 +170,7 @@
                                     <ol class="commentlist">
                                         <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
                                             <div id="comment-20" class="comment_container"> 
-                                                <img alt="" src="assets/images/author-avata.jpg" height="80" width="80">
+                                                <img alt="" src="{{asset('ui/frontend/assets/images/author-avata.jpg')}}" height="80" width="80">
                                                 <div class="comment-text">
                                                     <div class="star-rating">
                                                         <span class="width-80-percent">Rated <strong class="rating">5</strong> out of 5</span>
