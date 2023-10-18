@@ -20,4 +20,10 @@ class IndexController extends Controller
         $product_color=explode(',',$color);
         return view('frontend.product.product_details',compact('product','product_size','product_color'));
     }
+    public function showSlider(Category $category)
+    {
+        $products = $category->products; // Get products associated with the selected category
+
+        // return view('slider.index', compact('products'));
+    }
 }

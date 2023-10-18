@@ -271,6 +271,15 @@
     });
 </script>
 
+{{-- <script>
+    var len=document.querySelectorAll(".sidebar-item").length;
+    for(var i=0;i<len;i++){
+        document.querySelectorAll(".sidebar-item")[i].addEventListener("click",function(){
+            document.querySelector("sidebar-item").classList.add("active");
+        })
+    }
+</script> --}}
+
 </body>
 
 </html>

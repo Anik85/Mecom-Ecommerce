@@ -1,6 +1,5 @@
 @php
     $products= App\Models\Product::where('status',1)->orderBy('id','ASC')->limit(7)->get();
-
 @endphp
 
 

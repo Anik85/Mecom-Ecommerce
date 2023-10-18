@@ -61,6 +61,7 @@ Route::get('/', function () {
     return view('frontend.index');
 })->name('homepage');
 Route::get('/product/details/{id}/{slug}',[IndexController::class,'ProductDetails']);
+// Route::get('/category/{id}/{category_name}', [IndexController::class, 'showSlider']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
