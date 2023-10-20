@@ -59,12 +59,10 @@ Route::middleware(['auth','role:vendor'])->group(function (){
 });
 
 
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('homepage');
-Route::get('/aboutUs', function () {
-    return view('frontend.aboutus');
-})->name('aboutUs');
+Route::get('/', function () {return view('frontend.index');})->name('homepage');
+Route::get('/aboutUs', function () {return view('frontend.aboutus');})->name('aboutUs');
+Route::get('/cart', function () {return view('frontend.cart');})->name('cart');
+Route::get('/contact-us', function () {return view('frontend.contact-us');})->name('contact-us');
 
 Route::get('/product/details/{id}/{slug}',[IndexController::class,'ProductDetails']);
 Route::get('/search', [ProductController::class, 'ProductSearch'])->name('product.search');

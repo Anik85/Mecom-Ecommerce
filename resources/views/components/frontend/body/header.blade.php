@@ -96,10 +96,10 @@
                             </a>
                         </div>
                         <div class="wrap-icon-section minicart">
-                            <a href="#" class="link-direction">
+                            <a href="{{ route('cart') }}" class="link-direction">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                 <div class="left-info">
-                                    <span class="index">4 items</span>
+                                    <span class="index">0 items</span>
                                     <span class="title">CART</span>
                                 </div>
                             </a>
@@ -148,7 +148,7 @@
                                 <a href="checkout.html" class="link-term mercado-item-title">Checkout</a>
                             </li>
                             <li class="menu-item">
-                                <a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
+                                <a href="{{ route('contact-us') }}" class="link-term mercado-item-title">Contact Us</a>
                             </li>
                         </ul>
                     </div>

@@ -7,14 +7,14 @@
         <!--BANNER-->
         <x-frontend.home.banner/>
 
-        <!--On Sale-->
-        <x-frontend.home.sale/>
-
         <!--Latest Products-->
         <x-frontend.home.latestproduct/>
 
         <!--Product Categories-->
         <x-frontend.home.productcategory/>
+        
+        <!--On Sale-->
+        <x-frontend.home.sale/>
 
     </div>
 
