@@ -107,4 +107,9 @@ class ProductController extends Controller
         Product::findorFail($id)->update(['status'=>1]);
         return redirect()->route('products.index');
     }
+    public function ProductSearch(Request $request){
+        $data=Product::where('product_name','like','%'.$request->input('search').'%')->get();
+        return view('frontend.searchproduct',['products'=>$data]);
+
+    }
 }

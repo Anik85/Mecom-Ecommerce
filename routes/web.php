@@ -10,6 +10,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,7 @@ Route::middleware(['auth','role:admin'])->group(function (){
     Route::resource('sliders',SliderController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('products',ProductController::class);
+    Route::resource('users',UserController::class);
 
     
 });
@@ -60,12 +62,24 @@ Route::middleware(['auth','role:vendor'])->group(function (){
 Route::get('/', function () {
     return view('frontend.index');
 })->name('homepage');
-Route::get('/product/details/{id}/{slug}',[IndexController::class,'ProductDetails']);
-// Route::get('/category/{id}/{category_name}', [IndexController::class, 'showSlider']);
+Route::get('/aboutUs', function () {
+    return view('frontend.aboutus');
+})->name('aboutUs');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/product/details/{id}/{slug}',[IndexController::class,'ProductDetails']);
+Route::get('/search', [ProductController::class, 'ProductSearch'])->name('product.search');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth','role:user'])->group(function (){
+Route::get('/dashboard', function () {return view('users.admin_dashboard');})->name('dashboard');
+Route::get('/user/profile',[UserController::class,'userProfile'])->name('user.profile');
+Route::get('/user/logout',[UserController::class,'userDestroy'])->name('user.logout');
+Route::post('/user/profile/store',[UserController::class,'userProfileStore'])->name('user.profile.store');
+Route::get('/user/change/password',[UserController::class,'userChangePassword'])->name('user.change.password');
+Route::post('/user/update/password',[UserController::class,'userUpdatePassword'])->name('user.update.password');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

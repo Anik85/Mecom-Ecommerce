@@ -53,6 +53,11 @@
                     <i class="align-middle" data-feather="book"></i> <span class="align-middle">Products</span>
                 </a>
             </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{route('users.index')}}">
+                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">users</span>
+                </a>
+            </li>
 
 
 

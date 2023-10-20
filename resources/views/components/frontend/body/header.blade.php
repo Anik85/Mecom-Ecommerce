@@ -12,8 +12,21 @@
                     </div>
                     <div class="topbar-menu right-menu">
                         <ul>
-                            <li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
-                            <li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li>
+
+                            @if (Route::has('login'))
+                                <li class="menu-item" >
+                                    @auth
+                                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                                    
+                                </li>
+                            @else
+                                <li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
+                                <li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li>
+                                @endauth
+                            @endif
+                            {{-- <li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
+                            <li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li> --}}
+                            
                             <li class="menu-item lang-menu menu-item-has-children parent">
                                 <a title="English" href="#"><span class="img label-before"><img src="{{asset('ui/frontend/assets/images/lang-en.png')}}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <ul class="submenu lang" >
@@ -54,9 +67,9 @@
 
                     <div class="wrap-search center-section">
                         <div class="wrap-search-form">
-                            <form action="#" id="form-search-top" name="form-search-top">
+                            <form action="{{ route('product.search') }}" id="form-search-top" name="form-search-top">
                                 <input type="text" name="search" value="" placeholder="Search here...">
-                                <button form="form-search-top" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button form="form-search-top" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 <div class="wrap-list-cate">
                                     <input type="hidden" name="product-cate" value="0" id="product-cate">
                                     <a href="#" class="link-control">All Category</a>
@@ -123,7 +136,7 @@
                                 <a href="{{route('homepage')}}" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
                             </li>
                             <li class="menu-item">
-                                <a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+                                <a href="{{ route('aboutUs') }}" class="link-term mercado-item-title">About Us</a>
                             </li>
                             <li class="menu-item">
                                 <a href="shop.html" class="link-term mercado-item-title">Shop</a>
