@@ -1,4 +1,15 @@
 <x-frontend.layouts.master_dashbord>
+    <br>
+    <div class="container">
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible show">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+    </div>
     <div class="container">
         <!--main area-->
 	<main id="main" class="main-site">
@@ -74,7 +85,11 @@
                             </div>
                         </div>
                         <div class="wrap-butons">
-                            <a href="#" class="btn add-to-cart">Add to Cart</a>
+                            <form action="{{ url('add/to-cart/'.$product->id) }}" method="post">
+                                @csrf
+                                <input type="hidden" name="price" value="{{ $product->selling_price }}">
+                                <button type="submit" class="btn add-to-cart">Add to Cart</button>
+                            </form>
                             <div class="wrap-btn">
                                 <a href="#" class="btn btn-compare">Add Compare</a>
                                 <a href="#" class="btn btn-wishlist">Add Wishlist</a>

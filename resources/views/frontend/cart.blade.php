@@ -1,5 +1,9 @@
 <x-frontend.layouts.master_dashbord>
-
+@php 
+    $categories= App\Models\Category::orderBy('category_name','ASC')->get();
+    $carts= App\Models\Cart::orderBy('product_id','ASC')->get();
+    $products=App\Models\Product::where('status',1)->orderBy('id','DESC')->get();
+@endphp
 
 	{{-- <!--main area-->
 	<main id="main" class="main-site">
@@ -13,69 +17,64 @@
         <div class="wrap-breadcrumb">
             <ul>
                 <li class="item-link"><a href="#" class="link">home</a></li>
-                <li class="item-link"><span>login</span></li>
+                <li class="item-link"><span>cart</span></li>
             </ul>
         </div>
         <div class=" main-content-area">
 
             <div class="wrap-iten-in-cart">
                 <h3 class="box-title">Products Name</h3>
-                <ul class="products-cart">
-                    <li class="pr-cart-item">
-                        <div class="product-image">
-                            <figure><img src="assets/images/products/digital_18.jpg" alt=""></figure>
-                        </div>
-                        <div class="product-name">
-                            <a class="link-to-product" href="#">Radiant-360 R6 Wireless Omnidirectional Speaker [White]</a>
-                        </div>
-                        <div class="price-field produtc-price"><p class="price">$256.00</p></div>
-                        <div class="quantity">
-                            <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >									
-                                <a class="btn btn-increase" href="#"></a>
-                                <a class="btn btn-reduce" href="#"></a>
+                    @php
+                        $total=0
+                    @endphp
+                    @foreach ($carts as $cart)
+                    @php
+                        $Producttocart=App\Models\Product::where('id',$cart->product_id)->orderBy('id','DESC')->get();
+                    @endphp
+                    @foreach ($Producttocart as $tocart)
+                        
+                    
+                    @php
+                        $total+=$tocart->selling_price * $cart->product_qty
+                    @endphp
+                    <ul class="products-cart">
+                        <li class="pr-cart-item">
+                            <div class="product-image">
+                                <figure><img src="assets/images/products/digital_18.jpg" alt=""></figure>
                             </div>
-                        </div>
-                        <div class="price-field sub-total"><p class="price">$256.00</p></div>
-                        <div class="delete">
-                            <a href="#" class="btn btn-delete" title="">
-                                <span>Delete from your cart</span>
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="pr-cart-item">
-                        <div class="product-image">
-                            <figure><img src="assets/images/products/digital_20.jpg" alt=""></figure>
-                        </div>
-                        <div class="product-name">
-                            <a class="link-to-product" href="#">Radiant-360 R6 Wireless Omnidirectional Speaker [White]</a>
-                        </div>
-                        <div class="price-field produtc-price"><p class="price">$256.00</p></div>
-                        <div class="quantity">
-                            <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*">									
-                                <a class="btn btn-increase" href="#"></a>
-                                <a class="btn btn-reduce" href="#"></a>
+                            <div class="product-name">
+                                <a class="link-to-product" href="#">{{ $tocart->product_name }}</a>
                             </div>
-                        </div>
-                        <div class="price-field sub-total"><p class="price">$256.00</p></div>
-                        <div class="delete">
-                            <a href="#" class="btn btn-delete" title="">
-                                <span>Delete from your cart</span>
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </li>												
-                </ul>
+                            <div class="price-field produtc-price"><p class="price">{{ $tocart->selling_price }}</p></div>
+                            <div class="quantity">
+                                <div class="quantity-input">
+                                    <input type="text" name="product-quatity" value="{{ $cart->product_qty }}" data-max="120" pattern="[0-9]*" >									
+                                    <a class="btn btn-increase" href="#"></a>
+                                    <a class="btn btn-reduce" href="#"></a>
+                                </div>
+                            </div>
+                            <div class="price-field sub-total"><p class="price">{{ $tocart->selling_price * $cart->product_qty }}</p></div>
+                            <div class="delete">
+                                <a href="#" class="btn btn-delete" title="">
+                                    <span>Delete from your cart</span>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>	
+                                
+                                                                    
+                    </ul>
+                @endforeach
+                @endforeach
+
             </div>
 
             <div class="summary">
                 <div class="order-summary">
                     <h4 class="title-box">Order Summary</h4>
-                    <p class="summary-info"><span class="title">Subtotal</span><b class="index">$512.00</b></p>
+                    <p class="summary-info"><span class="title">Subtotal</span><b class="index">TK {{ $total }}</b></p>
                     <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                    <p class="summary-info total-info "><span class="title">Total</span><b class="index">$512.00</b></p>
+                    <p class="summary-info total-info "><span class="title">Total</span><b class="index">TK {{ $total }}</b></p>
                 </div>
                 <div class="checkout-info">
                     <label class="checkbox-field">
@@ -90,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="wrap-show-advance-info-box style-1 box-in-site">
+            {{-- <div class="wrap-show-advance-info-box style-1 box-in-site">
                 <h3 class="title-box">Most Viewed Products</h3>
                 <div class="wrap-products">
                     <div class="products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"3"},"1200":{"items":"5"}}' >
@@ -238,10 +237,32 @@
                         </div>
                     </div>
                 </div><!--End wrap-products-->
-            </div>
+            </div> --}}
 
         </div><!--end main content area-->
     </div><!--end container-->
+    <script type="text/javascript">
+    $(".btn-delete").click(function(e){
+        e.preventDefault();
+        var ele=$(this);
+        if(confirm("Do you really want to delete?")){
+            $.ajax({
+                [
+                    url:'{{ route('remove_from_cart') }}',
+                    method:DELETE,
+                    data:{
+                        _token:'{{ csrf_token() }}',
+                        id:ele.parents.parents.parents("div").attr("data-id")
+                    },
+                    success:function(response){
+                        window.location.reload();
+                    }
+                ]
+            });
+        }
+    })
+
+    </script>
 
 
 </x-frontend.layouts.master_dashbord>

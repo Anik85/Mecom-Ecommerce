@@ -95,11 +95,14 @@
                                 </div>
                             </a>
                         </div>
+                        @php
+                            $quantity=App\Models\Cart::where('user_ip',request()->ip())->sum('product_qty');
+                        @endphp
                         <div class="wrap-icon-section minicart">
                             <a href="{{ route('cart') }}" class="link-direction">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                 <div class="left-info">
-                                    <span class="index">0 items</span>
+                                    <span class="index">{{ $quantity }} items</span>
                                     <span class="title">CART</span>
                                 </div>
                             </a>
@@ -117,7 +120,7 @@
             </div>
 
             <div class="nav-section header-sticky">
-                <div class="header-nav-section">
+                {{-- <div class="header-nav-section">
                     <div class="container">
                         <ul class="nav menu-nav clone-main-menu" id="mercado_haead_menu" data-menuname="Sale Info" >
                             <li class="menu-item"><a href="#" class="link-term">Weekly Featured</a><span class="nav-label hot-label">hot</span></li>
@@ -127,7 +130,7 @@
                             <li class="menu-item"><a href="#" class="link-term">Top rated items</a><span class="nav-label hot-label">hot</span></li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="primary-nav-section">
                     <div class="container">
@@ -142,7 +145,7 @@
                                 <a href="shop.html" class="link-term mercado-item-title">Shop</a>
                             </li>
                             <li class="menu-item">
-                                <a href="cart.html" class="link-term mercado-item-title">Cart</a>
+                                <a href="{{ route('cart') }}" class="link-term mercado-item-title">Cart</a>
                             </li>
                             <li class="menu-item">
                                 <a href="checkout.html" class="link-term mercado-item-title">Checkout</a>

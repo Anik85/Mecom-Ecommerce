@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
@@ -63,6 +62,8 @@ Route::get('/', function () {return view('frontend.index');})->name('homepage');
 Route::get('/aboutUs', function () {return view('frontend.aboutus');})->name('aboutUs');
 Route::get('/cart', function () {return view('frontend.cart');})->name('cart');
 Route::get('/contact-us', function () {return view('frontend.contact-us');})->name('contact-us');
+Route::post('add/to-cart/{product_id}',[CartController::class,'addToCart'])->name('add_to_cart');
+Route::delete('/remove_from_cart',[ProductController::class,'remove'])->name('remove_from_cart');
 
 Route::get('/product/details/{id}/{slug}',[IndexController::class,'ProductDetails']);
 Route::get('/search', [ProductController::class, 'ProductSearch'])->name('product.search');

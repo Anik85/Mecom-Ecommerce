@@ -99,12 +99,12 @@ class ProductController extends Controller
     }
     public function ProductInactive($id)
     {
-        Product::findorFail($id)->update(['status'=>0]);
+        Product::findOrFail($id)->update(['status'=>0]);
         return redirect()->route('products.index');
     }
     public function ProductActive($id)
     {
-        Product::findorFail($id)->update(['status'=>1]);
+        Product::findOrFail($id)->update(['status'=>1]);
         return redirect()->route('products.index');
     }
     public function ProductSearch(Request $request){
@@ -112,4 +112,6 @@ class ProductController extends Controller
         return view('frontend.searchproduct',['products'=>$data]);
 
     }
+
+    
 }
