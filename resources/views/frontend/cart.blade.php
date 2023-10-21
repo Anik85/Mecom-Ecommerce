@@ -55,10 +55,15 @@
                             </div>
                             <div class="price-field sub-total"><p class="price">{{ $tocart->selling_price * $cart->product_qty }}</p></div>
                             <div class="delete">
-                                <a href="#" class="btn btn-delete" title="">
+                                {{-- <a href="#" class="btn btn-delete" title="">
                                     <span>Delete from your cart</span>
                                     <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </a>
+                                </a> --}}
+                                <form style="display: inline" action="{{route('carts.destroy',['cart'=>$tocart->id])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('are you sure want to delete?')">Delete</button>
+                                </form>
                             </div>
                         </li>	
                                 
@@ -240,29 +245,7 @@
             </div> --}}
 
         </div><!--end main content area-->
-    </div><!--end container-->
-    <script type="text/javascript">
-    $(".btn-delete").click(function(e){
-        e.preventDefault();
-        var ele=$(this);
-        if(confirm("Do you really want to delete?")){
-            $.ajax({
-                [
-                    url:'{{ route('remove_from_cart') }}',
-                    method:DELETE,
-                    data:{
-                        _token:'{{ csrf_token() }}',
-                        id:ele.parents.parents.parents("div").attr("data-id")
-                    },
-                    success:function(response){
-                        window.location.reload();
-                    }
-                ]
-            });
-        }
-    })
-
-    </script>
+    </div><!--end container--> 
 
 
 </x-frontend.layouts.master_dashbord>
